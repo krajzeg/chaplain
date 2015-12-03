@@ -5,9 +5,7 @@ var _ = require('lodash');
 
 gulp.task('default', ['compile']);
 gulp.task('compile', ['compile-lib', 'compile-test']);
-gulp.task('clean', function(done) {
-  del("dist", done);
-});
+gulp.task('clean', makeCleanTask('dist'));
 
 gulp.task('compile-lib', makeES6Tasks('lib', 'dist/lib'));
 gulp.task('compile-test', makeES6Tasks('test', 'dist/test'));
@@ -15,31 +13,34 @@ gulp.task('compile-test', makeES6Tasks('test', 'dist/test'));
 // ========================================================================
 
 function makeES6Tasks(srcDirectory, distDirectory) {
-  gulp.task('clean:' + srcDirectory, makeCleanTask(distDirectory));
-  gulp.task('copy-json:' + srcDirectory, makeCopyJsonTask(srcDirectory, distDirectory));
-  gulp.task('compile-js:' + srcDirectory, makeES6CompileTask(srcDirectory, distDirectory));
-  return ['clean', 'copy-json', 'compile-js'].map(function(prefix){
-    return [prefix, srcDirectory].join(":");
-  });
+  var clean = 'clean:' + srcDirectory;
+  var copy = 'copy-json:' + srcDirectory;
+  var compile = 'compile-js:' + srcDirectory;
+
+  gulp.task(clean, makeCleanTask(distDirectory));
+  gulp.task(copy, [clean], makeCopyJsonTask(srcDirectory, distDirectory));
+  gulp.task(compile, [copy], makeES6CompileTask(srcDirectory, distDirectory));
+
+  return [compile];
 }
 
 function makeCleanTask(directory) {
   var del = require('del');
-  return function(cb) {
-    del(directory, cb);
+  return function() {
+    return del(directory);
   }
 }
 
 function makeES6CompileTask(source, destination) {
-  var sources = path.join(source, '**/*.js');
-
+  var sourceFiles = path.join(source, '**/*.js');
   return function() {
     var babel = require('gulp-babel');
     var sourcemaps = require('gulp-sourcemaps');
 
-    return gulp.src(sources)
+    return gulp.src(sourceFiles)
       .pipe(sourcemaps.init())
       .pipe(babel({
+        presets: ['es2015'],
         retainLines: true
       }))
       .pipe(sourcemaps.write('.', {
