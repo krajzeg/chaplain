@@ -1,0 +1,37 @@
+{
+  "name": "deacon",
+  "version": "0.0.1",
+  "description": "A testing tool for easy detection and blessing of changes in any sort of output, from command line output to HTML served over HTTP.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krajzeg/deacon"
+  },
+  "keywords": [
+    "testing",
+    "http",
+    "bless",
+    "response",
+    "output",
+    "automated"
+  ],
+  "author": "Jakub Wasilewski <wasyl@wasyl.eu> (http://wasyl.eu)",
+  "license": "Zlib",
+  "bugs": {
+    "url": "https://github.com/krajzeg/deacon/issues"
+  },
+  "homepage": "https://github.com/krajzeg/deacon",
+  "dependencies": {
+    "bluebird": "^3.0.6",
+    "lodash": "^3.10.1"
+  },
+  "devDependencies": {
+    "del": "^2.1.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-sourcemaps": "^1.6.0"
+  }
+}

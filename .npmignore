@@ -1,0 +1,7 @@
+test
+coverage
+pre-commit.sh
+.jshintrc
+.gitignore
+.editorconfig
+*.iml
