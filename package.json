@@ -2,7 +2,7 @@
   "name": "deacon",
   "version": "0.0.1",
   "description": "A testing tool for easy detection and blessing of changes in any sort of output, from command line output to HTML served over HTTP.",
-  "main": "lib/index.js",
+  "main": "dist/lib/index.js",
   "scripts": {
     "test": "gulp && node_modules/.bin/mocha dist/test/*.js"
   },
