@@ -3,7 +3,7 @@
 
 let assert = require('chai').assert;
 import { Test, TestResult } from '../lib/test';
-import { makeSource, makeEmptySource, equalsComparator } from './helpers';
+import { makeSource, makeEmptySource, equalsComparator } from './helpers/helpers';
 
 describe("Test runs", () => {
   it("should return an IDENTICAL result when there are no changes", (done) => {
