@@ -3,7 +3,18 @@ var del = require('del');
 var path = require('path');
 var _ = require('lodash');
 
-gulp.task('default', ['compile']);
+gulp.task('default', ['make-runnable-binary']);
+
+gulp.task('make-runnable-binary', ['compile'], function() {
+  var chmod = require('gulp-chmod');
+  gulp.src('dist/lib/chaplain.js')
+    .pipe(chmod({
+      owner: {execute: true},
+      group: {execute: true},
+      others: {execute: true}
+    })).pipe(gulp.dest('dist/lib'));
+});
+
 gulp.task('compile', ['compile-lib', 'compile-test']);
 gulp.task('clean', makeCleanTask('dist'));
 
