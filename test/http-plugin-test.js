@@ -34,7 +34,7 @@ describe("HTTP plugin", () => {
         assert.deepEqual(result, {
           props: {
             statusCode: 200,
-            mimeType: 'text/plain; charset=utf-8'
+            mimeType: 'text/plain'
           },
           value: "Hi."
         });
