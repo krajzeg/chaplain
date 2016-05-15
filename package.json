@@ -1,7 +1,7 @@
 {
   "name": "chaplain",
   "version": "0.0.1",
-  "description": "A testing tool for effortless end-to-end tests of HTTP services.",
+  "description": "A testing tool for effortless regression tests of HTTP services.",
   "main": "dist/lib/index.js",
   "bin": {
     "chaplain": "dist/lib/chaplain.js"
@@ -15,14 +15,15 @@
   },
   "keywords": [
     "testing",
+    "regression",
     "http",
     "bless",
-    "response",
-    "output",
+    "html",
+    "json",
     "automated"
   ],
   "author": "Jakub Wasilewski <wasyl@wasyl.eu> (http://wasyl.eu)",
-  "license": "Zlib",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/krajzeg/vicar/issues"
   },
