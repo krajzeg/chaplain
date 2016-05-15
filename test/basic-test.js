@@ -2,11 +2,11 @@
 "use strict";
 
 import {assert} from 'chai';
-import {run} from '../lib/index';
+import chaplain from '../lib/index';
 
 describe('Empty suite', () => {
   it('should return correct results', (done) => {
-    run({tests: []}, {})
+    chaplain({tests: []}).runSuite()
       .then(r => {
         assert.ok(r.success);
         assert.deepEqual(r.results, {});

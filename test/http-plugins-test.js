@@ -5,8 +5,8 @@ import express from 'express';
 import http from 'http';
 import {assert} from 'chai';
 
-import serverPlugin from '../lib/plugins/plugin-http-server';
-import sourcePlugin from '../lib/plugins/plugin-http-source';
+import serverPlugin from '../lib/plugins/std-http-server';
+import sourcePlugin from '../lib/plugins/source-http';
 
 describe("HTTP plugin", () => {
   it("should handle servers and requests", (done) => {
