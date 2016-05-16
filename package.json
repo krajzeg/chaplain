@@ -4,7 +4,7 @@
   "description": "A testing tool for effortless regression tests of HTTP services.",
   "main": "dist/lib/index.js",
   "bin": {
-    "chaplain": "dist/lib/chaplain.js"
+    "chaplain": "dist/lib/cli/chaplain.js"
   },
   "scripts": {
     "test": "gulp && node_modules/.bin/mocha dist/test/*.js"

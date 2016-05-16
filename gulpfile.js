@@ -7,12 +7,12 @@ gulp.task('default', ['make-runnable-binary']);
 
 gulp.task('make-runnable-binary', ['compile'], function() {
   var chmod = require('gulp-chmod');
-  gulp.src('dist/lib/chaplain.js')
+  gulp.src('dist/lib/cli/chaplain.js')
     .pipe(chmod({
       owner: {execute: true},
       group: {execute: true},
       others: {execute: true}
-    })).pipe(gulp.dest('dist/lib'));
+    })).pipe(gulp.dest('dist/lib/cli'));
 });
 
 gulp.task('compile', ['compile-lib', 'compile-test']);
