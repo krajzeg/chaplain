@@ -28,8 +28,9 @@ describe("HTTP plugin", () => {
     const srvInstance = serverPlugin.create(suite);
     const srcInstance = sourcePlugin.create(suite, suite.tests[0]);
 
-    srvInstance.setup()
-      .then(srcInstance.fetch)
+    let ctx = {};
+    srvInstance.setup(ctx)
+      .then(() => srcInstance.fetch(ctx))
       .then((result) => {
         assert.deepEqual(result, {
           props: {
@@ -39,7 +40,11 @@ describe("HTTP plugin", () => {
           value: "Hi."
         });
       })
-      .then(srvInstance.teardown)
+      .then(() => srvInstance.teardown(ctx))
+      .then(() => {
+        assert.equal(ctx.host, undefined);
+        assert.equal(ctx.proto, undefined);
+      })
       .then(done).catch(done);
   });
 });
