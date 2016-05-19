@@ -33,7 +33,7 @@ describe("HTTP plugin", () => {
       .then(() => srcInstance.fetch(ctx))
       .then((result) => {
         assert.deepEqual(result, {
-          props: {
+          keyProps: {
             'status code': 200,
             'type': 'text/plain'
           },
