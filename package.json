@@ -34,6 +34,7 @@
     "deep-equal": "^1.0.1",
     "diff": "^2.2.2",
     "good-guy-http": "^1.7.1",
+    "hiff": "^0.3.0",
     "inquirer": "^1.0.2",
     "lodash": "^3.10.1",
     "minimist": "^1.2.0",
