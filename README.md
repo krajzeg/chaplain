@@ -4,6 +4,8 @@
 
 ## The update-bless cycle
 
+![Terminal capture of Chaplain](http://i.imgur.com/TqNgwCq.gif)
+
 Unlike traditional testing, where you specify and maintain the expectations on your output manually, **chaplain** takes a different approach.
 
 * for each test you have, a **blessed** output is stored in your repository
