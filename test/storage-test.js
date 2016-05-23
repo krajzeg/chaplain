@@ -10,9 +10,10 @@ describe("Blessed storage", () => {
     fs: mockFS.fs(),
     storageDir: '.test'
   });
+  const aTest = {name: 'a test ą', suite: {name: 'a suite ę'}};
 
   it('should return null on missing files', (done) => {
-    storage.fetch('a-test')
+    storage.fetch(aTest)
       .then(obj => {
         assert.strictEqual(obj, null);
       }).then(done).catch(done);
@@ -20,8 +21,8 @@ describe("Blessed storage", () => {
 
   it('should be able to write objects and read them back', (done) => {
     const stored = {hi: 'hello'};
-    storage.store('a-test', stored)
-      .then(() => storage.fetch('a-test'))
+    storage.store(aTest, stored)
+      .then(() => storage.fetch(aTest))
       .then(fetched => {
         assert.deepEqual(fetched, stored);
       }).then(done).catch(done);
