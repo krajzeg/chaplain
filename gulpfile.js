@@ -6,7 +6,7 @@ gulp.task('default', ['make-runnable-binary']);
 
 gulp.task('make-runnable-binary', ['compile'], function() {
   var chmod = require('gulp-chmod');
-  gulp.src('dist/lib/cli/chaplain.js')
+  gulp.src('dist/lib/cli/chaplain-cli.js')
     .pipe(chmod({
       owner: {execute: true},
       group: {execute: true},

@@ -4,7 +4,7 @@
   "description": "A testing tool for effortless regression tests of HTTP services.",
   "main": "dist/lib/index.js",
   "bin": {
-    "chaplain": "dist/lib/cli/chaplain.js"
+    "chaplain": "dist/lib/cli/chaplain-cli.js"
   },
   "scripts": {
     "test": "gulp && mocha dist/test/*.js"
@@ -25,9 +25,9 @@
   "author": "Jakub Wasilewski <wasyl@wasyl.eu> (http://wasyl.eu)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/krajzeg/vicar/issues"
+    "url": "https://github.com/krajzeg/chaplain/issues"
   },
-  "homepage": "https://github.com/krajzeg/vicar",
+  "homepage": "https://github.com/krajzeg/chaplain",
   "dependencies": {
     "bluebird": "^3.0.6",
     "chalk": "^1.1.3",
