@@ -27,7 +27,6 @@ describe("CLI", () => {
 
     it("should return an exit code of 1", () => {
       assert.equal(exitCode, 1);
-      console.log(stdout);
     });
     it("should not return any specific info for tests that pass", () => {
       assert.notOk(stdout.includes("every-result:passing"));
