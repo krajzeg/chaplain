@@ -38,6 +38,11 @@ suite('example-suite', function() {
 
     json: {
       ignore: ['_generatedOn', 'meta.validUntil[0]'] // ignore changes to properties matching these JSON paths
+    },
+
+    // the HTTP fetcher can also be configured, both per-suite and per-test
+    http: {
+      timeout: 1000 // how longer (in ms) to wait for a response before failing the test, defaults to 2000ms
     }
   });
 
