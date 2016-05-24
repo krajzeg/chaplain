@@ -4,6 +4,7 @@
 import Promise from 'bluebird';
 import _ from 'lodash';
 import path from 'path';
+import createMockFileSystem from './mock-fs';
 
 const fs = Promise.promisifyAll(require('fs'));
 // this is to cope with an issue in mock-fs:
@@ -20,6 +21,5 @@ export function createFilesForMockFS(realDirectory) {
         return fs.readFileAsync(path.resolve(realDirectory, name))
           .then(contents => [mockFilename, contents.toString()]);
       }));
-    }).then(_.object)
-      .catch(err => console.error(err));
+    }).then((pairs) => createMockFileSystem(_.object(pairs)));
 }

@@ -3,13 +3,18 @@
 
 import {assert} from 'chai';
 import setupStorage from '../lib/storage/storage';
+import createMockFS from './helpers/mock-fs';
 
 describe("Blessed storage", () => {
-  const storage = setupStorage({
-    fs: require('mock-fs').fs({}),
-    storageDir: '.test'
-  });
+  let storage;
   const aTest = {name: 'a test ą', suite: {name: 'a suite ę'}};
+
+  before((done) => {
+    createMockFS({})
+      .then(fs => {
+        storage = setupStorage({fs, storageDir: '.test'})
+      }).then(done).catch(done);
+  });
 
   it('should return null on missing files', (done) => {
     storage.fetch(aTest)
