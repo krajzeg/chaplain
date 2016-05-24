@@ -2,12 +2,11 @@
 "use strict";
 
 import {assert} from 'chai';
-import mockFS from 'mock-fs';
 import setupStorage from '../lib/storage/storage';
 
 describe("Blessed storage", () => {
   const storage = setupStorage({
-    fs: mockFS.fs(),
+    fs: require('mock-fs').fs({}),
     storageDir: '.test'
   });
   const aTest = {name: 'a test ą', suite: {name: 'a suite ę'}};

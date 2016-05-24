@@ -3,18 +3,28 @@
 
 import cliEngine from '../../lib/cli/cli-engine';
 import mockOutput from './mock-output';
-import mockFs from 'mock-fs';
+import {createFilesForMockFS} from './mock-files';
 
-export function setupTestCLI(files = {}) {
+export function setupTestCLI({args = ['-IC'], files = {}}) {
   const out = mockOutput();
-  const cli = cliEngine({
-    argv: ['node', 'chaplain-cli.js'],
-    fs: mockFs.fs(files),
 
-    write: out.write.bind(out),
-    writeError: out.writeError.bind(out),
-    isTTY: false
-  });
+  let resolveFileMap;
+  if (typeof files == 'string') {
+    resolveFileMap = createFilesForMockFS(files);
+  } else {
+    resolveFileMap = Promise.resolve(files || {});
+  }
 
-  return {cli, out};
+  return resolveFileMap
+    .then(fileMap => {
+      const cli = cliEngine({
+        argv: ['node', 'chaplain-cli.js'].concat(args),
+        fs: require('mock-fs').fs(fileMap),
+
+        write: out.write.bind(out),
+        writeError: out.writeError.bind(out),
+        isTTY: false
+      });
+      return {cli, out};
+    });
 }
