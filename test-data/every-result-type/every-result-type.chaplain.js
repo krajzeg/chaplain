@@ -12,6 +12,6 @@ suite('every-result', function() {
   // blessed output stored, hence different results
   test('passing', {url: '/'});
   test('new', {url: '/'});
-  test('modified', {url: '/'});
-  test('prop-change', {url: '/'});
+  test('changed', {url: '/'});
+  test('key-prop-change', {url: '/'});
 });
