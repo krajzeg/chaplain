@@ -15,7 +15,7 @@ describe("CLI", () => {
         files: path.join(process.cwd(), 'test-data/every-result-type'),
         args: ['-IC', '-f', 'every-result-type.chaplain.js', '-d', './']
       })
-        .then(t => {cli = t.cli; out = t.out})
+        .then(t => {cli = t.cli; out = t.out;})
         .then(() => cli.run())
         .then(exit => {
           exitCode = exit;

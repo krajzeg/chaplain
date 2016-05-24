@@ -10,7 +10,7 @@ describe("CLI", () => {
     let cli, out;
 
     setupTestCLI({files: {}})
-      .then(t => {cli = t.cli; out = t.out})
+      .then(t => {cli = t.cli; out = t.out;})
       .then(() => cli.run())
       .then(exitCode => {
       assert.strictEqual(exitCode, 2);
@@ -23,7 +23,7 @@ describe("CLI", () => {
     setupTestCLI({
       files: path.join(process.cwd(), 'test-data/empty-suite'),
       args: ['-IC', '-f', 'empty-suite.chaplain.js']
-    }).then(t => {cli = t.cli; out = t.out})
+    }).then(t => {cli = t.cli; out = t.out;})
       .then(() => cli.run())
       .then(exitCode => {
         assert.strictEqual(exitCode, 0);

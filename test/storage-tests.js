@@ -12,7 +12,7 @@ describe("Blessed storage", () => {
   before((done) => {
     createMockFS({})
       .then(fs => {
-        storage = setupStorage({fs, storageDir: '.test'})
+        storage = setupStorage({fs, storageDir: '.test'});
       }).then(done).catch(done);
   });
 

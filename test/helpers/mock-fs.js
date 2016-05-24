@@ -1,9 +1,12 @@
+/* jshint node: true, esversion: 6 */
+"use strict";
+
 // Enough of a mock for our purposes:
 // supports:
 //   readFile,
 //   writeFile,
-//   stat - but the Stats are useless, useful only for checking file existance
-//
+//   stat - but the Stats are useless, useful only for checking file existence
+//   mkdir
 // Quick-and-dirty, but still more predictable than mock-fs :[
 
 import fs from 'fs';
