@@ -3,6 +3,7 @@
 
 import {assert} from 'chai';
 import {createBeforeAfter} from "../../lib/steps/before-after-runner";
+import expectRejection from "../helpers/expect-rejection";
 
 describe("Before/after runner", () => {
   it("should cause no trouble with no befores/afters", () => {
@@ -33,5 +34,15 @@ describe("Before/after runner", () => {
       .then(() => {
         assert.equal(context.value, 5);
       });
+  });
+
+  it("should wrap exceptions happening in callbacks", () => {
+    const ba = createBeforeAfter({
+      befores: [() => {
+        throw new Error("Hi!");
+      }]
+    });
+    return expectRejection(ba.runBefores())
+      .then(err => assert.equal(err.code, 'EUSERFACING'));
   });
 });
