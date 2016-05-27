@@ -2,6 +2,7 @@
 "use strict";
 
 import readTestFile from '../lib/cli/read-testfile/read-testfile';
+import _ from 'lodash';
 import fs from 'fs';
 import {assert} from 'chai';
 
@@ -9,7 +10,9 @@ describe("Reading suites from testfiles", () => {
   it("should work for an empty suite", () =>
     readTestFile(fs, './test-data/read-testfile-tests/empty-testfile.js')
       .then(suites => {
-        assert.deepEqual(suites, [
+        assert.ok(suites[0].context);
+        const result = suites.map(s => _.omit(s, ['context']));
+        assert.deepEqual(result, [
           {name: 'empty', tests: []}
         ]);
       })
@@ -36,6 +39,9 @@ describe("Reading suites from testfiles", () => {
   it("should work for two suites", () =>
     readTestFile(fs, './test-data/read-testfile-tests/two-suites.js')
       .then(([s1,s2]) => {
+        assert.ok(s1.context && s2.context);
+        s1 = _.omit(s1, ['context']);
+        s2 = _.omit(s2, ['context']);
         assert.deepEqual(s1, {name: 'a', a: true, tests: [
           {name: 'a', url: '/a'}
         ]});
