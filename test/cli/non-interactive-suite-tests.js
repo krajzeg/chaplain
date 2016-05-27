@@ -41,4 +41,31 @@ describe("CLI", () => {
       assert.ok(stdout.includes("every-result:key-prop-change has changed key properties"));
     });
   });
+
+  describe("when running a suite with befores/afters", () => {
+    let exitCode, stdout, stderr;
+
+    before((done) => {
+      let cli, out;
+      setupTestCLI({
+        files: path.join(process.cwd(), 'test-data/before-after'),
+        args: ['-IC', '-f', 'before-after.chaplain.js', '-d', './']
+      })
+        .then(t => {cli = t.cli; out = t.out;})
+        .then(() => cli.run())
+        .then(exit => {
+          exitCode = exit;
+          stdout = out.stdout();
+          stderr = out.stderr();
+        })
+        .then(done).catch(done);
+    });
+
+    it("should return an exit code of 0", () => {
+      assert.equal(exitCode, 0);
+    });
+    it("should execute the test added in before()", () => {
+      assert.ok(stdout.includes("All tests passed (1 in total)"));
+    });
+  });
 });
