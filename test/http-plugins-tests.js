@@ -32,13 +32,10 @@ describe("HTTP plugin", () => {
     srvInstance.setup(ctx)
       .then(() => srcInstance.fetch(ctx))
       .then((result) => {
-        assert.deepEqual(result, {
-          keyProps: {
-            'status code': 200,
-            'type': 'text/plain'
-          },
-          value: "Hi."
-        });
+        assert.ok(result.httpVersion);
+        assert.ok(result.headers);
+        assert.ok(result.statusCode);
+        assert.ok(result.body);
       })
       .then(() => srvInstance.teardown(ctx))
       .then(() => {
