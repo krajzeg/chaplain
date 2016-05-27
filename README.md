@@ -1,6 +1,8 @@
 ## Chaplain
 
-**Chaplain** is a testing tool with a difference. It's intended as a replacement for manually maintained end-to-end tests, and its strong suit is preventing regressions in any website, service or microservice that starts an HTTP server. 
+**Chaplain** is a testing tool with a difference. It's intended as a replacement for manually maintained end-to-end tests. Its strong suit is preventing regressions in any website, service or microservice that starts an HTTP server, with a minimum of effort on your part.
+
+The project is still pretty young - here is the [current roadmap](https://github.com/krajzeg/chaplain/wiki/Roadmap).
 
 ## The update-bless cycle
 
