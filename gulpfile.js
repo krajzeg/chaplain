@@ -14,11 +14,12 @@ gulp.task('make-runnable-binary', ['compile'], function() {
     })).pipe(gulp.dest('dist/lib/cli'));
 });
 
-gulp.task('compile', ['compile-lib', 'compile-test']);
+gulp.task('compile', ['compile-lib', 'compile-test', 'compile-chaplain-suite']);
 gulp.task('clean', makeCleanTask('dist'));
 
 gulp.task('compile-lib', makeES6Tasks('lib', 'dist/lib'));
 gulp.task('compile-test', makeES6Tasks('test', 'dist/test'));
+gulp.task('compile-chaplain-suite', makeES6Tasks('test-chaplain', 'dist/test-chaplain'));
 
 // ========================================================================
 

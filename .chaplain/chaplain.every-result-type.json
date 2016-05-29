@@ -1,0 +1,6 @@
+{
+  "value": "+[:-) Running Chaplain tests .+??\n====[ every-result:new is newly added ]=======================================\n====[ HTTP GET / ]============================================================\nYour test returned status code: 200, type: text/plain\nand the following contents:\n\nCucumber.\n====[ every-result:changed has changes ]======================================\n====[ HTTP GET / ]============================================================\nIn line 1:\nTomatoCucumber.\n====[ every-result:key-prop-change has changed key properties ]===============\n====[ HTTP GET / ]============================================================\nYour test used to return status code: 666.\nBut now, it returns status code: 200.\nThe new contents are:\n\nCucumber.\n\n+[:-( Some failing tests remain:\n+[:-(  1 new test(s)\n+[:-(  1 changed test(s)\n+[:-(  1 key props changed test(s)\n",
+  "keyProps": {
+    "type": "text/plain"
+  }
+}

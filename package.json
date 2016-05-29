@@ -7,7 +7,7 @@
     "chaplain": "dist/lib/cli/chaplain-cli.js"
   },
   "scripts": {
-    "test": "gulp && mocha --recursive dist/test"
+    "test": "gulp --silent && mocha -R dot --recursive dist/test && chaplain -f dist/test-chaplain/chaplain.tests.js"
   },
   "repository": {
     "type": "git",
@@ -50,6 +50,6 @@
     "gulp-chmod": "^1.3.0",
     "gulp-sourcemaps": "^1.6.0",
     "jshint": "^2.9.2",
-    "mocha": "^2.3.4"
+    "mocha": "^2.5.3"
   }
 }
