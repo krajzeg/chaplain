@@ -4,4 +4,3 @@ dist
 node_modules
 coverage
 npm-debug.log
-.travis.yml
