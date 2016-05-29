@@ -5,3 +5,4 @@ pre-commit.sh
 .gitignore
 .editorconfig
 *.iml
+.travis.yml
