@@ -1,22 +1,25 @@
 // This is an example test file, intended as a demonstration of
-// everything that's possible. It will run properly, but the
-// implementation of the server is missing, so it will not be
-// very interesting to do so.
+// *everything* that's possible. As such, it is long, so its
+// only intended to let you quickly check how something is done,
+// and not as an example of good practice or something to read
+// top-to-bottom.
 
 // Tests go in suites. One suite == one server/app to test.
 // If you need to reconfigure your app for different tests (for
 // example to insert different mock data), those different
 // configuration go in different suites
 suite('example-suite', function() {
-  // Every suite has two parts - a config(), which specifies
+  // Every suite has two main parts - a config(), which specifies
   // stuff that applies to all the tests, and a series of
   // test() declarations - one per test.
 
   config({
-    // these properties let you specify the app to test
-    // you have to specify exactly one
-    app: require('./my-app'), // any Express app, or other http.Server compatible request handler will do
-    server: http.createServer(sth), // you can also create an http.Server yourself if that's convenient
+    // the 'server' property lets you specify what to test
+    // it can be an Express app, an http.Server/https.Server, or even just a URL
+    // to an external server you want to test against
+    server: require('./some-app'), // - an app
+    //server: http.createServer(sth)  - http.Server instance
+    //server: 'http://localhost:9000' - external
 
     // chaplain detects what diff implementation to use by inspecting
     // the Content-type returned by the server. If it doesn't make the
@@ -61,6 +64,33 @@ suite('example-suite', function() {
   test('fiddly-test', {
     url: '/json-with-crappy-metadata',
     json: { ignore: ['details.meta'] }
+  });
+
+  // if you'd like to test something else than an HTTP server (or test a server in
+  // a way we don't support yet), you can give Chaplain a promise, and it will treat
+  // the value of this promise as the thing to test
+  test('promise-test', function() {
+    return runShell('ls -l').then(function(r) { return r.stdout; }); // one idea of what you could do
+  });
+
+  // you can still specify other options when using promises
+  test('promise-test-2', {your: 'options'}, function() {});
+
+  // if necessary, you can use before() and after() functions to set things up
+  // before tests run, and tear them down once they are complete
+  // both functions should return promises to indicate when setup is done
+  before(function() {
+    // you can use before to set external stuff stuff up
+    return runShell('./testServer start');
+  });
+  before(function(suite) {
+    // ...or to asynchronously configure the suite like this:
+    suite.config({server: "http://localhost:" + aPort});
+    suite.test('dynamically-added-test', {test: 'options'});
+  });
+  // after works just like before... but after :)
+  after(function() {
+    return runShell('./testServer stop');
   });
 });
 
