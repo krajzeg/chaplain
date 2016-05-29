@@ -7,7 +7,8 @@
     "chaplain": "dist/lib/cli/chaplain-cli.js"
   },
   "scripts": {
-    "test": "gulp --silent && mocha -R dot --recursive dist/test && ./dist/lib/cli/chaplain-cli.js -f dist/test-chaplain/chaplain.tests.js",
+    "test": "gulp --silent && mocha -R dot --recursive dist/test",
+    "chaplain-test": "gulp --silent && ./dist/lib/cli/chaplain-cli.js -f dist/test-chaplain/chaplain.tests.js",
     "coverage": "gulp --silent && istanbul cover node_modules/mocha/bin/_mocha -- --recursive dist/test"
   },
   "repository": {
