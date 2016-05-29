@@ -6,7 +6,7 @@ import {assert} from 'chai';
 import path from 'path';
 
 describe("CLI", () => {
-  describe("when running a suite with all result types in -I mode", () => {
+  context("when running a suite with all result types in -I mode", () => {
     let exitCode, stdout, stderr;
 
     before(() => {
@@ -23,6 +23,9 @@ describe("CLI", () => {
     it("should return an exit code of 1", () => {
       assert.equal(exitCode, 1);
     });
+    it("should have failed 5 out of 6 tests", () => {
+      assert.ok(stderr.includes("Some failing tests (5 out of 6) remain:"));
+    });
     it("should not return any specific info for tests that pass", () => {
       assert.notOk(stdout.includes("every-result:passing"));
     });
@@ -35,9 +38,17 @@ describe("CLI", () => {
     it("should return correct info for changes in key props", () => {
       assert.ok(stdout.includes("every-result:key-prop-change has changed key properties"));
     });
+    it("should return correct info for handled errors", () => {
+      assert.ok(stdout.includes("every-result:error ran into some trouble"));
+    });
+    it("should return correct info for unhandled exceptions", () => {
+      assert.ok(stdout.includes("every-result:exception threw an exception"));
+      assert.ok(stdout.includes("Please report this issue here: https://github.com/krajzeg/chaplain/issues"));
+      assert.ok(stdout.includes("at every-result-type.chaplain.js")); // stacktrace
+    });
   });
 
-  describe("when running a suite with befores/afters", () => {
+  context("when running a suite with befores/afters", () => {
     let exitCode, stdout, stderr;
 
     before(() => {
