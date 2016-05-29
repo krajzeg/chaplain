@@ -29,7 +29,7 @@ function makeES6Tasks(srcDirectory, distDirectory) {
   var compile = 'compile-js:' + srcDirectory;
 
   gulp.task(clean, makeCleanTask(distDirectory));
-  gulp.task(copy, [clean], makeCopyJsonTask(srcDirectory, distDirectory));
+  gulp.task(copy, makeCopyJsonTask(srcDirectory, distDirectory));
   gulp.task(compile, [copy], makeES6CompileTask(srcDirectory, distDirectory));
 
   return [compile];
@@ -46,9 +46,11 @@ function makeES6CompileTask(source, destination) {
   var sourceFiles = path.join(source, '**/*.js');
   return function() {
     var babel = require('gulp-babel');
+    var changed = require('gulp-changed');
     var sourcemaps = require('gulp-sourcemaps');
 
     return gulp.src(sourceFiles)
+      .pipe(changed(destination))
       .pipe(sourcemaps.init())
       .pipe(babel({
         presets: ['es2015'],
@@ -69,6 +71,9 @@ function makeES6CompileTask(source, destination) {
 function makeCopyJsonTask(source, destination) {
   var sourcePattern = path.join(source, '**/*.json');
   return function() {
-    return gulp.src(sourcePattern).pipe(gulp.dest(destination));
+    var changed = require('gulp-changed');
+    return gulp.src(sourcePattern)
+      .pipe(changed(destination))
+      .pipe(gulp.dest(destination));
   };
 }
