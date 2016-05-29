@@ -4,12 +4,20 @@
 export default function setupOutputMock() {
   let stdoutContents = "";
   let stderrContents = "";
+  let allContents = "";
 
   return {
-    write(str) { stdoutContents += str; },
-    writeError(str) { stderrContents += str; },
-    
+    write(str) {
+      stdoutContents += str;
+      allContents += str;
+    },
+    writeError(str) {
+      stderrContents += str;
+      allContents += str;
+    },
+
     stdout() { return stdoutContents; },
-    stderr() { return stderrContents; }
+    stderr() { return stderrContents; },
+    allOutput() { return allContents; }
   };
 }

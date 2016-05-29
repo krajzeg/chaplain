@@ -21,3 +21,23 @@ export function setupTestCLI({args = ['-IC'], files = {}}) {
       return {cli, out};
     });
 }
+
+export function runCLITest(parameters) {
+  let cli, out;
+
+  return setupTestCLI(parameters)
+    .then(t => { cli = t.cli; out = t.out; })
+    .then(() => cli.run())
+    .then(exitCode => {
+      return {
+        exitCode,
+        stdout: out.stdout(),
+        stderr: out.stderr(),
+        output: out.allOutput()
+      };
+    });
+}
+
+export function runCLIAndGetOutput(parameters) {
+  return runCLITest(parameters).then(({output}) => output);
+}

@@ -1,7 +1,7 @@
 /* jshint node: true, esversion: 6 */
 "use strict";
 
-import {setupTestCLI} from '../helpers/test-cli';
+import {runCLITest} from '../helpers/test-cli';
 import {assert} from 'chai';
 import path from 'path';
 
@@ -9,20 +9,15 @@ describe("CLI", () => {
   describe("when running a suite with all result types in -I mode", () => {
     let exitCode, stdout, stderr;
 
-    before((done) => {
-      let cli, out;
-      setupTestCLI({
+    before(() => {
+      return runCLITest({
         files: path.join(process.cwd(), 'test-data/every-result-type'),
         args: ['-IC', '-f', 'every-result-type.chaplain.js', '-d', './']
-      })
-        .then(t => {cli = t.cli; out = t.out;})
-        .then(() => cli.run())
-        .then(exit => {
-          exitCode = exit;
-          stdout = out.stdout();
-          stderr = out.stderr();
-        })
-        .then(done).catch(done);
+      }).then(result => {
+        exitCode = result.exitCode;
+        stdout = result.stdout;
+        stderr = result.stderr;
+      });
     });
 
     it("should return an exit code of 1", () => {
@@ -45,20 +40,15 @@ describe("CLI", () => {
   describe("when running a suite with befores/afters", () => {
     let exitCode, stdout, stderr;
 
-    before((done) => {
-      let cli, out;
-      setupTestCLI({
+    before(() => {
+      return runCLITest({
         files: path.join(process.cwd(), 'test-data/before-after'),
         args: ['-IC', '-f', 'before-after.chaplain.js', '-d', './']
-      })
-        .then(t => {cli = t.cli; out = t.out;})
-        .then(() => cli.run())
-        .then(exit => {
-          exitCode = exit;
-          stdout = out.stdout();
-          stderr = out.stderr();
-        })
-        .then(done).catch(done);
+      }).then(r => {
+        exitCode = r.exitCode;
+        stdout = r.stdout;
+        stderr = r.stderr;
+      });
     });
 
     it("should return an exit code of 0", () => {
