@@ -69,4 +69,33 @@ describe("CLI", () => {
       assert.ok(stdout.includes("All tests passed (1 in total)"));
     });
   });
+
+  context("when 'chaplain bless'-ing a suite", () => {
+    let exitCode, stdout, stderr, fs;
+
+    before(() => {
+      return runCLITest({
+        files: path.join(process.cwd(), 'test-data/two-new'),
+        args: ['bless', 'two-new:a.*', '-C', '-f', 'two-new.chaplain.js', '-d', './']
+      }).then(r => {
+        exitCode = r.exitCode;
+        stdout = r.stdout;
+        stderr = r.stderr;
+        fs = r.fs;
+      });
+    });
+
+    it("should return an exit code of 0", () => {
+      assert.equal(exitCode, 0);
+    });
+    it("should give the correct information", () => {
+      assert.ok(stdout.includes("two-new:alpha: blessed"));
+      assert.ok(stdout.includes(":-) Blessed 1 test(s)."));
+      assert.strictEqual(stderr, '');
+    });
+    it("should save only the files it should", () => {
+      assert.ok(fs.getFileContents('./two-new.alpha.json'));
+      assert.notOk(fs.getFileContents('./two-new.beta.json'));
+    });
+  });
 });

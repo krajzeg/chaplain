@@ -25,4 +25,15 @@ describe("CLI", () => {
       assert.ok(stdout.includes("0 in total"));
     });
   });
+
+  it("should refuse to run 'chaplain bless' with no pattern", () => {
+    return runCLITest({
+      files: path.join(process.cwd(), 'test-data/empty-suite'),
+      args: ['bless']
+    }).then(({exitCode, stdout, stderr}) => {
+      assert.strictEqual(exitCode, 2);
+      assert.ok(stderr.includes("You have to specify which tests to bless."));
+      assert.ok(stdout.includes("Usage:\n"));
+    });
+  });
 });

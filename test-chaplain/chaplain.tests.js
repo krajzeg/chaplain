@@ -19,4 +19,9 @@ suite("chaplain", () => {
     files: path.join(process.cwd(), 'test-data/every-result-type'),
     args: ['-IC', '-f', 'every-result-type.chaplain.js', '-d', './']
   }));
+
+  test("chaplain-bless", () => runCLIAndGetOutput({
+    files: path.join(process.cwd(), 'test-data/two-new'),
+    args: ['bless', 'two-new:a.*', '-C', '-f', 'two-new.chaplain.js', '-d', './']
+  }));
 });
