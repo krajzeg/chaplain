@@ -54,4 +54,25 @@ describe("Text diff", () => {
       );
     });
   });
+
+  context("when using ignoreWords", () => {
+    const before = "One @Two\nThree Four\nFive @Six @Seven\nEight Nine";
+    const after = "One @Ten\nThree Four\nFive @Less\nEight Nein";
+    const tf = textFormat.create({}, {
+      text: {ignoreWords: '@.*'}
+    });
+
+    const result = tf.compare(before, after);
+
+    it("should ignore the right things", () => {
+      assert.lengthOf(result, 1);
+    });
+    it("should produce the right output for changes", () => {
+      assert.equal(out.prepareMessage(result[0].message),
+        "In line 4:\n" +
+        "Five <ignored>\n" +
+        "Eight NeinNine"
+      );
+    });
+  });
 });
