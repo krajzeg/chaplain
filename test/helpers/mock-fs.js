@@ -30,8 +30,7 @@ export default function createMockFilesystem(files) {
   // ======================================================================
 
   function getFileContents(path) {
-    path = resolve(path);
-    return filesystem[path];
+    return _.get(filesystem, resolve(path));
   }
 
   function readFile(filePath, callback) {
