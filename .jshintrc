@@ -13,6 +13,11 @@
     "beforeEach" : false,
     "after"      : false,
     "afterEach"  : false,
-    "context"    : false
+    "context"    : false,
+
+    /* Chaplain globals */
+    "suite": false,
+    "config": false,
+    "test": false
   }
 }

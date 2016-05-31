@@ -12,7 +12,7 @@
   "scripts": {
     "pretest": "gulp --silent",
     "test": "mocha -R dot --recursive dist/test && ./dist/lib/cli/chaplain-cli.js -f dist/test-chaplain/chaplain.tests.js",
-    "coverage": "gulp --silent && istanbul cover node_modules/mocha/bin/_mocha -- --recursive dist/test"
+    "coverage": "gulp --silent && istanbul cover node_modules/mocha/bin/_mocha -- --recursive test"
   },
   "repository": {
     "type": "git",

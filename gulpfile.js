@@ -39,7 +39,7 @@ function makeCleanTask(directory) {
   var del = require('del');
   return function() {
     return del(directory);
-  }
+  };
 }
 
 function makeES6CompileTask(source, destination) {
@@ -60,12 +60,12 @@ function makeES6CompileTask(source, destination) {
         sourceRoot: function(file) {
           // we have to go the right number of directories up
           var depth = file.relative.split('/').length + 1;
-          var rootRelativePath = _.range(0, depth).map(function() { return '../'}).join('');
+          var rootRelativePath = _.range(0, depth).map(function() { return '../'; }).join('');
           return rootRelativePath + source;
         }
       }))
       .pipe(gulp.dest(destination));
-  }
+  };
 }
 
 function makeCopyJsonTask(source, destination) {

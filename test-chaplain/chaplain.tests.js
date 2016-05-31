@@ -1,3 +1,6 @@
+/* jshint node: true, esversion: 6 */
+"use strict";
+
 import {runCLIAndGetOutput} from '../test/helpers/test-cli';
 import path from 'path';
 

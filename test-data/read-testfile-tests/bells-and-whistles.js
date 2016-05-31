@@ -1,3 +1,6 @@
+/* jshint node: true, esversion: 6 */
+"use strict";
+
 suite('bells', function() {
   config({cfg: true});
 
