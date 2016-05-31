@@ -24,4 +24,8 @@ suite("chaplain", () => {
     files: path.join(process.cwd(), 'test-data/two-new'),
     args: ['bless', 'two-new:a.*', '-C', '-f', 'two-new.chaplain.js', '-d', './']
   }));
+
+  test("help", () => runCLIAndGetOutput({
+    args: ['--help']
+  }));
 });
