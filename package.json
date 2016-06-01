@@ -12,7 +12,9 @@
   "scripts": {
     "pretest": "gulp --silent",
     "test": "mocha -R dot --recursive dist/test && ./dist/lib/cli/chaplain-cli.js -f dist/test-chaplain/chaplain.tests.js",
-    "coverage": "gulp --silent && istanbul cover node_modules/mocha/bin/_mocha -- --recursive test"
+    "test-cov": "mocha -R dot --recursive test",
+    "coverage": "nyc --require babel-core/register npm run test-cov && nyc report --reporter=html && nyc report --reporter=lcov",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
   },
   "repository": {
     "type": "git",
@@ -46,8 +48,10 @@
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
+    "babel-core": "^6.1.18",
     "babel-preset-es2015": "^6.1.18",
     "chai": "^3.4.1",
+    "coveralls": "^2.11.9",
     "del": "^2.1.0",
     "express": "^4.13.4",
     "gulp": "^3.9.0",
@@ -55,8 +59,8 @@
     "gulp-changed": "^1.3.0",
     "gulp-chmod": "^1.3.0",
     "gulp-sourcemaps": "^1.6.0",
-    "istanbul": "^0.4.3",
     "jshint": "^2.9.2",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "nyc": "^6.4.4"
   }
 }

@@ -6,3 +6,5 @@ pre-commit.sh
 .editorconfig
 *.iml
 .travis.yml
+.nyc_output
+.babelrc

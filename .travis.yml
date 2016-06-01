@@ -1,8 +1,9 @@
 language: node_js
 node_js:
+# We support Node versions down to v4, currently
 - '6'
 - '5'
-- '4.2'
-# after_success:
-# - npm run coverage
-# - cat ./coverage/lcov.info | node_modules/.bin/coveralls
+- '4.4.5'
+after_success:
+# Report coverage only from one of the builds (the 4.4.5 one)
+- node -v | grep -q 'v4.4.5' && npm run coveralls
