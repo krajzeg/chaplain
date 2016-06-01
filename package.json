@@ -10,7 +10,7 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "compile": "rm -rf dist && babel lib --out-dir dist/lib && babel test --out-dir dist/test && babel test-chaplain --out-dir dist/test-chaplain && chmod +x dist/lib/cli/chaplain-cli.js",
+    "compile": "rm -rf dist && (babel lib --out-dir dist/lib) & (babel test --out-dir dist/test) & (babel test-chaplain --out-dir dist/test-chaplain) & wait && chmod +x dist/lib/cli/chaplain-cli.js",
     "pretest": "npm run compile",
     "prepublish": "npm run compile",
     "test": "mocha -R dot --recursive dist/test && ./dist/lib/cli/chaplain-cli.js -f dist/test-chaplain/chaplain.tests.js",
