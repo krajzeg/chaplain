@@ -4,16 +4,16 @@
   "description": "A testing tool for effortless regression tests of HTTP services.",
   "main": "dist/lib/index.js",
   "bin": {
-    "chaplain": "dist/lib/cli/chaplain-cli.js"
+    "chaplain": "bin/chaplain-cli.js"
   },
   "engines": {
     "node": ">=4.0.0"
   },
   "scripts": {
-    "compile": "rm -rf dist && babel -q lib --out-dir dist/lib && babel -q test --out-dir dist/test && babel -q test-chaplain --out-dir dist/test-chaplain && chmod +x dist/lib/cli/chaplain-cli.js",
+    "compile": "rm -rf dist && babel -q lib --out-dir dist/lib && babel -q test --out-dir dist/test && babel -q test-chaplain --out-dir dist/test-chaplain",
     "pretest": "npm run compile",
     "prepublish": "npm run compile",
-    "test": "mocha -R dot --recursive dist/test && ./dist/lib/cli/chaplain-cli.js -f dist/test-chaplain/chaplain.tests.js",
+    "test": "mocha -R dot --recursive dist/test && ./bin/chaplain-cli.js -f dist/test-chaplain/chaplain.tests.js",
     "test-cov": "mocha -R dot --recursive test",
     "coverage": "nyc --require babel-register npm run test-cov && nyc report --reporter=html && nyc report --reporter=lcov",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
