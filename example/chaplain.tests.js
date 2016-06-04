@@ -40,7 +40,9 @@ suite('example-suite', function() {
     },
 
     json: {
-      ignore: ['_generatedOn', 'meta.validUntil[0]'] // ignore changes to properties matching these JSON paths
+      ignore: ['_generatedOn', 'meta.validUntil[0]', // ignore changes to properties matching these JSON paths
+       '$..id', '$.children[*].id'] // you can also use queries compatible with the 'jsonpath' npm module to
+                                    // ignore multiple matching properties at once
     },
 
     // the HTTP fetcher can also be configured, both per-suite and per-test
