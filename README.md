@@ -1,4 +1,4 @@
-## Chaplain [![Build Status](https://travis-ci.org/krajzeg/chaplain.svg?branch=master)](https://travis-ci.org/krajzeg/chaplain) [![Coverage Status](https://coveralls.io/repos/github/krajzeg/chaplain/badge.svg?branch=master)](https://coveralls.io/github/krajzeg/chaplain?branch=master)
+## Chaplain [![Build Status](https://travis-ci.org/krajzeg/chaplain.svg?branch=master)](https://travis-ci.org/krajzeg/chaplain) [![Coverage Status](https://coveralls.io/repos/github/krajzeg/chaplain/badge.svg?branch=master)](https://coveralls.io/github/krajzeg/chaplain?branch=master) [![Dependency Status](https://david-dm.org/krajzeg/chaplain.svg)](https://david-dm.org/krajzeg/chaplain)
 
 **Chaplain** is a testing tool with a difference. It's intended as a replacement for manually maintained end-to-end tests. Its strong suit is preventing regressions in any website, service or microservice that starts an HTTP server, with a minimum of effort on your part.
 
