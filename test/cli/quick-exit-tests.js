@@ -36,6 +36,40 @@ describe("CLI", () => {
     });
   });
 
+  it("should complain if no tests match pattern", () => {
+    return runCLITest({
+      files: path.join(process.cwd(), 'test-data/empty-suite'),
+      args: ['bless', 'something', '-IC', '-f', 'empty-suite.chaplain.js']
+    }).then(({exitCode, stdout, stderr}) => {
+      assert.strictEqual(exitCode, 2);
+      assert.ok(stderr.includes("Found no matching test(s) to bless."));
+    });
+  });
+
+  it("should complain on -fnospace arg syntax", () => {
+    // this is because minimist does not support it
+    return runCLITest({
+      files: path.join(process.cwd(), 'test-data/empty-suite'),
+      args: ['-fempty-suite.chaplain.js']
+    }).then(({exitCode, stdout, stderr}) => {
+      assert.strictEqual(exitCode, 2);
+      assert.ok(stderr.includes("Please specify filename arguments with a space"));
+    });
+  });
+
+  it("should provide usage on unknown commands", () => {
+    return runCLITest({
+      files: path.join(process.cwd(), 'test-data/empty-suite'),
+      args: ['frob', 'something']
+    }).then(({exitCode, stdout, stderr}) => {
+      assert.strictEqual(exitCode, 2);
+      assert.ok(stderr.includes("Unknown command: frob"));
+      assert.ok(stdout.includes("Usage:\n"));
+    });
+  });
+
+
+
   it("should provide help when asked", () => {
     return runCLITest({
       args: ['--help']
