@@ -76,6 +76,30 @@ describe("CLI", () => {
     let exitCode, stdout, stderr;
 
     before(() => {
+      return runCLITest({
+        files: path.join(process.cwd(), 'test-data/weird-types'),
+        args: ['-IC', '-f', 'weird-types.chaplain.js', '-d', './']
+      }).then(r => {
+        exitCode = r.exitCode;
+        stdout = r.stdout;
+        stderr = r.stderr;
+      });
+    });
+
+    it("should return an exit code of 1", () => {
+      assert.equal(exitCode, 1);
+    });
+    it("should obey the type mappings", () => {
+      assert.ok(stdout.includes("41 -> 42")); // characteristic output for JSON compares
+    });
+    it("should fall back to plaintext if not mapped", () => {
+      assert.ok(stdout.includes("HiHello.")); // characteristic output for JSON compares
+    });
+  });
+
+  context("when using app-specific content types", () => {
+    let exitCode, stdout, stderr;
+    before(() => {
       const suitePath = path.join(process.cwd(), 'test-data/suite-with-require/suite-with-require.chaplain.js');
       const suiteDir = path.dirname(suitePath);
       return fs.readFileAsync(suitePath)
