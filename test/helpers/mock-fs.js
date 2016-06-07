@@ -77,11 +77,14 @@ export default function createMockFilesystem(files) {
   }
 
   function resolveFileList(files) {
+    const resolvedFiles = {};
     if (typeof files == 'object') {
-      return Promise.resolve(files);
+      _.each(files, (content, path) => {
+        _.set(resolvedFiles, resolve(path), content.toString());
+      });
+      return Promise.resolve(resolvedFiles);
     } else if (typeof files == 'string') {
       const realFSDirectory = files;
-      const resolvedFiles = {};
       return fs.readdirAsync(realFSDirectory)
         .then(filenames => {
           return Promise.all(filenames.map(name => {

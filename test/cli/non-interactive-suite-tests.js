@@ -4,6 +4,8 @@
 import {runCLITest} from '../helpers/test-cli';
 import {assert} from 'chai';
 import path from 'path';
+import Promise from 'bluebird';
+const fs = Promise.promisifyAll(require('fs'));
 
 describe("CLI", () => {
   context("when running a suite with all result types in -I mode", () => {
@@ -67,6 +69,30 @@ describe("CLI", () => {
     });
     it("should execute the test added in before()", () => {
       assert.ok(stdout.includes("All tests passed (1 in total)"));
+    });
+  });
+
+  context("when using require()s in a suite", () => {
+    let exitCode, stdout, stderr;
+
+    before(() => {
+      const suitePath = path.join(process.cwd(), 'test-data/suite-with-require/suite-with-require.chaplain.js');
+      const suiteDir = path.dirname(suitePath);
+      return fs.readFileAsync(suitePath)
+        .then(contents => runCLITest({
+          files: {[suitePath]: contents},
+          args: ['-IC', '-f', suitePath, '-d', suiteDir]
+        })).then(r => {
+          exitCode = r.exitCode;
+          stdout = r.stdout;
+          stderr = r.stderr;
+        });
+    });
+
+    it("they should work as expected", () => {
+      assert.equal(exitCode, 1);
+      assert.ok(stdout.includes("with-require:required is new"));
+      assert.ok(stdout.includes("Hello."));
     });
   });
 
