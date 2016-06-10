@@ -72,7 +72,7 @@ describe("CLI", () => {
     });
   });
 
-  context("when using require()s in a suite", () => {
+  context("when using app-specific content types", () => {
     let exitCode, stdout, stderr;
 
     before(() => {
@@ -97,7 +97,7 @@ describe("CLI", () => {
     });
   });
 
-  context("when using app-specific content types", () => {
+  context("when using require()'s within a suite", () => {
     let exitCode, stdout, stderr;
     before(() => {
       const suitePath = path.join(process.cwd(), 'test-data/suite-with-require/suite-with-require.chaplain.js');

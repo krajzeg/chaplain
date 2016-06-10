@@ -21,6 +21,46 @@ describe("Result transformer", () => {
     });
   });
 
+  it("should pick up obvious JSON strings", () => {
+    assert.deepEqual(transform('{"oh": "hello"}'), {
+      keyProps: { type: 'application/json' },
+      value: {oh: "hello"}
+    });
+  });
+
+  it("should pick up JSON objects as JSON", () => {
+    assert.deepEqual(transform({oh: "hi"}), {
+      keyProps: { type: 'application/json' },
+      value: {oh: "hi"}
+    });
+  });
+
+  it("should not pick up non-JSON-serializable objects as JSON", () => {
+    var selfRef = {toString: () => "[Self-referencing object]"};
+    selfRef.ref = selfRef;
+    assert.deepEqual(transform(selfRef), {
+      keyProps: { type: 'text/plain' },
+      value: "[Self-referencing object]"
+    });
+  });
+
+  it("should not pick up JSON primitives as JSON", () => {
+    assert.equal(transform('false').keyProps.type, "text/plain");
+    assert.equal(transform('42').keyProps.type, "text/plain");
+    assert.equal(transform('null').keyProps.type, "text/plain");
+    assert.equal(transform('"Hi."').keyProps.type, "text/plain");
+    assert.equal(transform(false).keyProps.type, "text/plain");
+    assert.equal(transform(42).keyProps.type, "text/plain");
+    assert.equal(transform(null).keyProps.type, "text/plain");
+  });
+
+  it("should mark strings it doesn't recognize as text/plain", () => {
+    assert.deepEqual(transform("Cucumber."), {
+      keyProps: {type: 'text/plain'},
+      value: "Cucumber."
+    });
+  });
+
   it("should cope with non-strings", () => {
     const result = transform(42);
     assert.deepEqual(result, {
