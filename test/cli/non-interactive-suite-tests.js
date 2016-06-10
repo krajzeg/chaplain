@@ -32,19 +32,19 @@ describe("CLI", () => {
       assert.notOk(stdout.includes("every-result:passing"));
     });
     it("should return correct info for new tests", () => {
-      assert.ok(stdout.includes("every-result:new is newly added"));
+      assert.ok(stdout.includes("NEW: every-result:new"));
     });
     it("should return correct info for changes in content", () => {
-      assert.ok(stdout.includes("every-result:changed has changes"));
+      assert.ok(stdout.includes("CHANGED: every-result:changed"));
     });
     it("should return correct info for changes in key props", () => {
-      assert.ok(stdout.includes("every-result:key-prop-change has changed key properties"));
+      assert.ok(stdout.includes("PROPERTIES CHANGED: every-result:key-prop-change"));
     });
     it("should return correct info for handled errors", () => {
-      assert.ok(stdout.includes("every-result:error ran into some trouble"));
+      assert.ok(stdout.includes("PROBLEM IN: every-result:error"));
     });
     it("should return correct info for unhandled exceptions", () => {
-      assert.ok(stdout.includes("every-result:exception threw an exception"));
+      assert.ok(stdout.includes("EXCEPTION IN: every-result:exception (whoops!)"));
       assert.ok(stdout.includes("Please report this issue here: https://github.com/krajzeg/chaplain/issues"));
       assert.ok(stdout.includes("at every-result-type.chaplain.js")); // stacktrace
     });
@@ -115,7 +115,7 @@ describe("CLI", () => {
 
     it("they should work as expected", () => {
       assert.equal(exitCode, 1);
-      assert.ok(stdout.includes("with-require:required is new"));
+      assert.ok(stdout.includes("NEW: with-require:required"));
       assert.ok(stdout.includes("Hello."));
     });
   });
