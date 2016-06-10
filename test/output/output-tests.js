@@ -39,11 +39,12 @@ describe("Output module", () => {
     out.log({changed: "Changed."});
     out.log({highlighted: "Highlighted."});
     out.log({bad: "Bad."});
+    out.log({comment: "Comment."});
     out.log({heading: "Heading."});
     out.log({happy: "Happy."});
     out.log({sad: "Sad."});
     assert.equal(written, "" +
-      "Added.\nRemoved.\nChanged.\nHighlighted.\nBad.\n" +
+      "Added.\nRemoved.\nChanged.\nHighlighted.\nBad.\nComment.\n" +
       "====[ Heading. ]" + '='.repeat(62) + "\n" +
       "+[:-) Happy.\n+[:-( Sad.\n");
   });
@@ -72,11 +73,12 @@ describe("Output module", () => {
       out.log({changed: "Changed."});
       out.log({highlighted: "Highlighted."});
       out.log({bad: "Bad."});
+      out.log({comment: "Comment."});
       out.log({heading: "Heading."});
       out.log({happy: "Happy."});
       out.log({sad: "Sad."});
       assert.equal(chalk.stripColor(written), "" +
-        "Added.\nRemoved.\nChanged.\nHighlighted.\nBad.\n" +
+        "Added.\nRemoved.\nChanged.\nHighlighted.\nBad.\nComment.\n" +
         "====[ Heading. ]" + '='.repeat(62) + "\n" +
         "+[:-) Happy.\n+[:-( Sad.\n");
       assert.notEqual(chalk.stripColor(written), written);
