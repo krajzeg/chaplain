@@ -69,6 +69,27 @@ describe("Result transformer", () => {
     });
   });
 
+  it("should cope with non-strings even marked as text/plain", () => {
+    const result = transform({
+      keyProps: {type: 'text/plain'},
+      value: {not: 'a string'}
+    });
+    assert.equal(result.keyProps.type, 'text/plain');
+    assert.equal(result.value, require('util').inspect({not: 'a string'}));
+  });
+
+
+  it("should use toString() if implemented when given non-strings as text/plain", () => {
+    const result = transform({
+      keyProps: {type: 'text/plain'},
+      value: {
+        toString() { return 'Hello!'; }
+      }
+    });
+    assert.equal(result.keyProps.type, 'text/plain');
+    assert.equal(result.value, "Hello!");
+  });
+
   it("should leave fully-formed result objects alone", () => {
     const result = transform({
       keyProps: {type: 'application/json'},
