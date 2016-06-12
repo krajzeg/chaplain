@@ -7,7 +7,13 @@ import createMockFS from './helpers/mock-fs';
 
 describe("Blessed storage", () => {
   let storage;
-  const aTest = {name: 'a test ą', suite: {name: 'a suite ę'}};
+  const aTest = {
+    name: 'a test ą',
+    suite: {name: 'a suite ę'},
+    key() {
+      return [this.suite.name, this.name].join(':');
+    }
+  };
 
   before((done) => {
     createMockFS({})
