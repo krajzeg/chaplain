@@ -13,8 +13,8 @@
     "compile": "rm -rf dist && babel -q lib --out-dir dist/lib && babel -q test --out-dir dist/test && babel -q test-chaplain --out-dir dist/test-chaplain",
     "pretest": "npm run compile",
     "prepublish": "npm run compile",
-    "test": "mocha -R dot --recursive dist/test && ./bin/chaplain-cli.js -f dist/test-chaplain/chaplain.tests.js",
-    "test-cov": "mocha -R dot --recursive test",
+    "test": "CHAPLAIN_TEST=true mocha -R dot --recursive dist/test && ./bin/chaplain-cli.js -f dist/test-chaplain/chaplain.tests.js",
+    "test-cov": "CHAPLAIN_TEST=true mocha -R dot --recursive test",
     "coverage": "nyc --require babel-register npm run test-cov && nyc report --reporter=html && nyc report --reporter=lcov",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
   },
