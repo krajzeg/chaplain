@@ -14,6 +14,7 @@
     "pretest": "npm run compile",
     "prepublish": "npm run compile",
     "test": "CHAPLAIN_TEST=true mocha -R dot --recursive dist/test && ./bin/chaplain-cli.js -f dist/test-chaplain/chaplain.tests.js",
+    "test-chaplain-only": "./bin/chaplain-cli.js -f dist/test-chaplain/chaplain.tests.js",
     "test-cov": "CHAPLAIN_TEST=true mocha -R dot --recursive test",
     "coverage": "nyc --require babel-register npm run test-cov && nyc report --reporter=html && nyc report --reporter=lcov",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
