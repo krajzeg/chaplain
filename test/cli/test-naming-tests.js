@@ -24,7 +24,6 @@ describe("Test names", () => {
       args: ['-IC', '-f', 'duplicate-test.chaplain.js', '-d', '.']
     }).then(({exitCode, stderr}) => {
       assert.strictEqual(exitCode, 2);
-      console.log(stderr);
       assert.ok(stderr.includes("Suite 'suite' already has a test called 'duplicate'"));
     });
   });
