@@ -2,7 +2,9 @@
 "use strict";
 
 export default function expectRejection(promise) {
-  return promise
-    .then(() => {throw new Error("Expect this promise to be rejected.");})
-    .catch(err => err);
+  return new Promise((resolve, reject) => {
+    promise
+      .then(() => reject(new Error("Expected this promise to be rejected.")))
+      .catch(err => resolve(err));
+  });
 }
