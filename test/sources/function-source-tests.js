@@ -23,7 +23,7 @@ describe("Function source plugin", () => {
       .then(obj => {
         assert.deepEqual(obj, {
           keyProps: {},
-          value: "42"
+          value: 42
         });
       });
   });
